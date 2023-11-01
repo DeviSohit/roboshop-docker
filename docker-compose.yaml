@@ -40,4 +40,42 @@ services:
     container_name: mysql
     networks:
       - roboshop
+  shipping:
+    image: shipping:v1
+    container_name: shipping
+    networks:
+      - roboshop
+    depends_on:
+      - cart
+      - mysql
+  rabbitmq:
+    image: rabbitmq
+    container_name: rabbitmq
+    networks:
+      - roboshop
+    environment:
+    - RABBITMQ_DEFAULT_USER=roboshop
+    - RABBITMQ_DEFAULT_PASS=roboshop123
+  payment:
+    image: payment:v1
+    container_name: payment
+    networks:
+      - roboshop
+    depends_on:
+      - cart
+      - user
+      - rabbitmq
+  web:
+    image: web:v1
+    container_name: web
+    networks:
+    - roboshop
+    ports:
+    - "80:80" # web need to expose to open inetrnet so that giving port forwarding
+    depends_on:
+    - catalogue
+    - user
+    - cart
+    - shipping
+    - payment
     
