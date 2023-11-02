@@ -3,12 +3,12 @@ networks:
     driver: bridge
 services:
   mongodb:
-    image: mongodb:v1
+    image: devimeena/mongodb:v1
     container_name: mongodb
     networks:
       - roboshop
   catalogue:
-    image: catalogue:v1
+    image: devimeena/catalogue:v1
     container_name: catalogue
     networks:
       - roboshop
@@ -20,7 +20,7 @@ services:
     networks:
       - roboshop
   user:
-    image: user:v1
+    image: devimeena/user:v1
     container_name: user
     networks:
       - roboshop
@@ -28,7 +28,7 @@ services:
       - mongodb
       - redis
   cart:
-    image: cart:v1
+    image: devimeena/cart:v1
     container_name: cart
     networks:
       - roboshop
@@ -36,12 +36,12 @@ services:
       - catalogue
       - redis
   mysql:
-    image: mysql:v1
+    image: devimeena/mysql:v1
     container_name: mysql
     networks:
       - roboshop
   shipping:
-    image: shipping:v1
+    image: devimeena/shipping:v1
     container_name: shipping
     networks:
       - roboshop
@@ -57,7 +57,7 @@ services:
     - RABBITMQ_DEFAULT_USER=roboshop
     - RABBITMQ_DEFAULT_PASS=roboshop123
   payment:
-    image: payment:v1
+    image: devimeena/payment:v1
     container_name: payment
     networks:
       - roboshop
@@ -66,7 +66,7 @@ services:
       - user
       - rabbitmq
   web:
-    image: web:v1
+    image: devimeena/web:v1
     container_name: web
     networks:
     - roboshop
