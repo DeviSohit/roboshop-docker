@@ -3,6 +3,8 @@ EXPOSE 8080
 USER root
 WORKDIR /app
 COPY requirements.txt /app/
+RUN apk --no-cache add build-base linux-headers
+RUN pip install --upgrade setuptools
 RUN pip install -r requirements.txt
 COPY *.py /app/
 COPY payment.ini /app/
